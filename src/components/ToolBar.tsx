@@ -71,18 +71,23 @@ const ToolBar = () => {
             <SelectItem
               label="Language"
               options={[
-                "auto",
                 "javascript",
                 "typescript",
                 "jsx",
                 "rust",
-                "go",
                 "python",
                 "c",
                 "c++",
                 "c#",
-                "coffeescript",
-              ]}
+                "html",
+                "markdown",
+                "css",
+                "scss",
+                "java",
+                "json",
+                "xml",
+                "text",
+              ].sort((a, b) => (a < b ? -1 : 1))}
               value={settings.language}
               onChange={(value) => {
                 setSettings({
@@ -203,7 +208,7 @@ const SelectItem = ({
                 <Select.Item
                   value={option}
                   key={i}
-                  className="px-2 h-7 rounded text-sm outline-none focus:bg-primary-500 focus:text-white flex items-center cursor-pointer overflow-hidden gap-3"
+                  className="px-2 h-7 rounded text-sm outline-none focus:bg-primary-500 focus:text-white flex items-center cursor-pointer overflow-hidden gap-3 justify-between"
                 >
                   <Select.ItemText className="flex-1 truncate">
                     {option}

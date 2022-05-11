@@ -43,6 +43,7 @@ const App = () => {
 }
 
 export default App;`;
+
 const defaultSettings: EditorSettings = {
   darkMode: true,
   dropShadow: true,

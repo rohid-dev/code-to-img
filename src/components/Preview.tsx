@@ -1,12 +1,23 @@
-import { javascript } from "@codemirror/lang-javascript";
-import { useCallback } from "react";
+import type { Extension } from "@codemirror/state";
+import { useCallback, useEffect, useState } from "react";
 import { useEditor } from "../contexts/EditorContext";
 import Editor from "./Editor/Editor";
 import { getTheme } from "./Editor/themes";
-import * as Popover from "@radix-ui/react-popover";
+
+import { javascript } from "@codemirror/lang-javascript";
+import { python } from "@codemirror/lang-python";
+import { html } from "@codemirror/lang-html";
+import { rust } from "@codemirror/lang-rust";
+import { css } from "@codemirror/lang-css";
+import { markdown } from "@codemirror/lang-markdown";
+import { cpp } from "@codemirror/lang-cpp";
+import { java } from "@codemirror/lang-java";
+import { json } from "@codemirror/lang-json";
+import { xml } from "@codemirror/lang-xml";
 
 const Preview = () => {
   const { settings, setSettings } = useEditor();
+  const [extentions, setExtentions] = useState<Extension[] | undefined>([]);
 
   const onCodeChange = useCallback(
     (value: string) => {
@@ -18,14 +29,70 @@ const Preview = () => {
     [setSettings]
   );
 
+  useEffect(() => {
+    switch (settings.language) {
+      case "json":
+        setExtentions([json()]);
+        break;
+      case "javascript":
+        setExtentions([javascript()]);
+        break;
+      case "coffeescript":
+        setExtentions([javascript()]);
+        break;
+      case "jsx":
+        setExtentions([javascript({ jsx: true, typescript: true })]);
+        break;
+      case "typescript":
+        setExtentions([javascript({ typescript: true })]);
+        break;
+      case "python":
+        setExtentions([python()]);
+        break;
+      case "html":
+        setExtentions([html()]);
+        break;
+      case "markdown":
+        setExtentions([markdown()]);
+        break;
+      case "css":
+        setExtentions([css()]);
+        break;
+      case "scss":
+        setExtentions([css()]);
+        break;
+      case "rust":
+        setExtentions([rust()]);
+        break;
+      case "c++":
+        setExtentions([cpp()]);
+        break;
+      case "c":
+        setExtentions([cpp()]);
+        break;
+      case "c#":
+        setExtentions([cpp()]);
+        break;
+      case "java":
+        setExtentions([java()]);
+        break;
+      case "xml":
+        setExtentions([xml()]);
+        break;
+      default:
+        setExtentions(undefined);
+        break;
+    }
+  }, [settings.language]);
+
   return (
     <div
-      className={`"w-full overflow-x-auto px-16" ${
+      className={`w-full overflow-x-auto p-16 mb-40 ${
         settings.darkMode ? "dark" : ""
       }`}
     >
       <div
-        className="mx-auto overflow-hidden w-fit mt-16 mb-40 bg-repeat bg-center rounded-xl"
+        className="mx-auto overflow-hidden w-fit bg-repeat bg-center rounded-xl"
         style={{
           backgroundImage: "url(/transparent-bg-pattern.png)",
         }}
@@ -59,7 +126,7 @@ const Preview = () => {
             <Editor
               value={settings.code}
               onChange={onCodeChange}
-              extensions={[javascript({ jsx: true, typescript: true })]}
+              extensions={extentions}
               theme={getTheme({
                 darkMode: settings.darkMode,
                 showLineNumber: settings.showLineNumber,
