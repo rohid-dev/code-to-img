@@ -4,7 +4,8 @@ import { useEditor } from "../contexts/EditorContext";
 import { BackgroundPicker } from "./BackgroundPicker";
 
 const ToolBar = () => {
-  const { setSettings, settings, onExport, onCopyLink } = useEditor();
+  const { setSettings, settings, onExport, onCopyAsLink, onCopyAsImage } =
+    useEditor();
 
   return (
     <div className="fixed bottom-0 w-full left-0 right-0 p-4 md:p-8 z-20 pointer-events-none">
@@ -109,6 +110,7 @@ const ToolBar = () => {
               }}
             />
             <SelectItem
+              disabled={settings.renderFormat === "svg"}
               label="Scale"
               options={["1x", "2x", "3x"]}
               value={settings.renderScale}
@@ -127,7 +129,7 @@ const ToolBar = () => {
                 Export
               </button>
               <button
-                onClick={() => onCopyLink()}
+                onClick={() => onCopyAsImage()}
                 className="bg-primary-500 hover:bg-primary-600 w-10 flex items-center justify-center h-full truncate rounded-r-md"
               >
                 <MdArrowDropDown className="text-2xl" />
@@ -183,11 +185,13 @@ const SelectItem = ({
   value,
   onChange,
   options,
+  disabled,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   options: string[];
+  disabled?: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -195,9 +199,10 @@ const SelectItem = ({
         {label}
       </label>
       <select
+        disabled={disabled}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-transparent cursor-pointer"
+        className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-transparent cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
       >
         {options.map((option, i) => (
           <option key={i} value={option}>

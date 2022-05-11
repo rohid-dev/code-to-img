@@ -214,7 +214,7 @@ const UnsplashPanel = () => {
                 setSettings({
                   ...settings,
                   backgroundColor: image.color,
-                  backgroundImage: `url(${image.urls.small})`,
+                  backgroundImage: `url(${image.urls.regular})`,
                 })
               }
             ></button>

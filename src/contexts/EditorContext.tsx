@@ -9,7 +9,7 @@ import {
 } from "react";
 import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { toPng, toJpeg, toSvg } from "html-to-image";
+import { toPng, toJpeg, toSvg, toBlob } from "html-to-image";
 import { Options } from "html-to-image/lib/options";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -61,7 +61,8 @@ export type EditorContextType = {
   setSettings: (newState: EditorSettings) => void;
   canvasRef: React.RefObject<HTMLDivElement>;
   onExport: () => void;
-  onCopyLink: () => void;
+  onCopyAsLink: () => void;
+  onCopyAsImage: () => void;
 };
 export const EditorContext = createContext<EditorContextType | null>(null);
 
@@ -97,17 +98,22 @@ export const EditorProvider = ({
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  const onExport: EditorContextType["onExport"] = useCallback(async () => {
-    if (!canvasRef.current) return;
-
+  const getConvertOptions = (settings: EditorSettings) => {
     const scale =
       settings.renderScale === "3x" ? 3 : settings.renderScale === "2x" ? 2 : 1;
 
     const options: Options = {
       canvasWidth: canvasRef.current.clientWidth * scale,
       canvasHeight: canvasRef.current.clientHeight * scale,
-      skipFonts: true,
+      quality: 0.95,
     };
+    return options;
+  };
+
+  const onExport: EditorContextType["onExport"] = useCallback(async () => {
+    if (!canvasRef.current) return;
+
+    const options = getConvertOptions(settings);
 
     var imgUrl: string | null = null;
 
@@ -136,13 +142,24 @@ export const EditorProvider = ({
     link.click();
   }, [settings, canvasRef]);
 
-  const onCopyLink: EditorContextType["onCopyLink"] = useCallback(async () => {
-    console.log(window.location);
-    const origin = window.location.origin;
-    const { data } = await axios.post(`/api/hash-object`, settings);
-    const link = `${origin}?token=${data.token}`;
-    window.navigator.clipboard.writeText(link);
-  }, [settings]);
+  const onCopyAsLink: EditorContextType["onCopyAsLink"] =
+    useCallback(async () => {
+      const origin = window.location.origin;
+      const { data } = await axios.post(`/api/hash-object`, settings);
+      const link = `${origin}?token=${data.token}`;
+      window.navigator.clipboard.writeText(link);
+    }, [settings]);
+
+  const onCopyAsImage: EditorContextType["onCopyAsImage"] =
+    useCallback(async () => {
+      if (!canvasRef.current) return;
+      const options = getConvertOptions(settings);
+      const blog = await toBlob(canvasRef.current, options);
+      window.navigator.clipboard.write([
+        new ClipboardItem({ "image/png": blog }),
+      ]);
+      console.log("Copied");
+    }, [settings]);
 
   if (isLoading) return null;
 
@@ -153,7 +170,8 @@ export const EditorProvider = ({
         setSettings,
         canvasRef,
         onExport,
-        onCopyLink,
+        onCopyAsLink,
+        onCopyAsImage,
       }}
     >
       {children}
