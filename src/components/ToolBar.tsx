@@ -2,10 +2,17 @@ import classNames from "classnames";
 import { MdArrowDropDown } from "react-icons/md";
 import { useEditor } from "../contexts/EditorContext";
 import { BackgroundPicker } from "./BackgroundPicker";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 const ToolBar = () => {
-  const { setSettings, settings, onExport, onCopyAsLink, onCopyAsImage } =
-    useEditor();
+  const {
+    setSettings,
+    settings,
+    onExport,
+    onCopyAsLink,
+    onCopyAsImage,
+    onReset,
+  } = useEditor();
 
   return (
     <div className="fixed bottom-0 w-full left-0 right-0 p-4 md:p-8 z-20 pointer-events-none">
@@ -97,7 +104,7 @@ const ToolBar = () => {
                 });
               }}
             />
-            <div className="w-px bg-white/10 h-12" />
+            <div className="w-px min-w-[1px] bg-white/10 h-12" />
             <SelectItem
               label="Format"
               options={["png", "jpeg", "svg"]}
@@ -121,20 +128,46 @@ const ToolBar = () => {
                 });
               }}
             />
-            <div className="flex ring-1 ring-white/20 h-10 rounded-md">
+            <div className="flex h-10 rounded-md">
               <button
                 onClick={() => onExport()}
                 className="bg-primary-500 hover:bg-primary-600 px-4 flex items-center justify-center h-full border-r border-r-primary-600 truncate rounded-l-md"
               >
                 Export
               </button>
-              <button
-                onClick={() => onCopyAsImage()}
-                className="bg-primary-500 hover:bg-primary-600 w-10 flex items-center justify-center h-full truncate rounded-r-md"
-              >
-                <MdArrowDropDown className="text-2xl" />
-              </button>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className="bg-primary-500 hover:bg-primary-600 w-10 flex items-center justify-center h-full truncate rounded-r-md">
+                    <MdArrowDropDown className="text-2xl" />
+                  </button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content
+                  sideOffset={10}
+                  align="center"
+                  side="top"
+                  className="bg-gray-900 ring-offset-white/20 ring-offset-1 rounded-lg backdrop-blur-xl ring-1 ring-black/40 shadow-2xl w-screen max-w-[180px] overflow-y-auto relative p-2"
+                >
+                  <DropdownMenu.Item
+                    className="outline-none cursor-pointer px-4 h-8 rounded focus:bg-primary-500 focus:text-white flex items-center gap-2"
+                    onClick={() => onCopyAsLink()}
+                  >
+                    Copy as Link
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    className="outline-none cursor-pointer px-4 h-8 rounded focus:bg-primary-500 focus:text-white flex items-center gap-2"
+                    onClick={() => onCopyAsImage()}
+                  >
+                    Copy as image
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
             </div>
+            <button
+              onClick={() => onReset()}
+              className="bg-gray-500/10 hover:bg-gray-500/20 px-4 flex items-center justify-center rounded-md h-10"
+            >
+              Reset
+            </button>
           </div>
         </div>
       </div>

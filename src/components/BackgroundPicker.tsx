@@ -42,7 +42,7 @@ export const BackgroundPicker = () => {
             }}
           />
         </Popover.Trigger>
-        <Popover.Content sideOffset={10} align="start">
+        <Popover.Content sideOffset={10} align="center" side="top">
           <div className="bg-gray-900 ring-offset-white/20 ring-offset-1 rounded-2xl backdrop-blur-xl ring-1 ring-black/40 shadow-2xl w-screen max-w-xs max-h-[500px] h-[70vh] overflow-y-auto relative">
             <div className="px-4 h-12 sticky top-0 z-10 bg-gray-900/60 backdrop-blur-xl border-b border-white/10">
               <ul className="flex gap-4 items-center h-full">
@@ -214,7 +214,7 @@ const UnsplashPanel = () => {
                 setSettings({
                   ...settings,
                   backgroundColor: image.color,
-                  backgroundImage: `url(${image.urls.regular})`,
+                  backgroundImage: `url(${image.urls.small})`,
                 })
               }
             ></button>

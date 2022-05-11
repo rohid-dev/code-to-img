@@ -115,7 +115,7 @@ const Preview = () => {
           }}
         >
           <div
-            className="dark:bg-gray-900/60 rounded-2xl backdrop-blur-2xl bg-white/60 text-gray-800 dark:text-gray-100 shadow-2xl border-black/30 border dark:border-white/30"
+            className="dark:bg-gray-800 rounded-2xl bg-white text-gray-800 dark:text-gray-100 shadow-2xl border-black/30 border dark:border-white/30"
             style={{
               transitionProperty: "box-shadow, background-color, border-color",
               transitionDuration: "300ms",

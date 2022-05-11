@@ -6,7 +6,7 @@ import "../styles/global.css";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <EditorProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </EditorProvider>
   );
 };

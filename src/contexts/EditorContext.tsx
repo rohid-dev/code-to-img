@@ -9,7 +9,7 @@ import {
 } from "react";
 import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { toPng, toJpeg, toSvg, toBlob } from "html-to-image";
+import { toPng, toJpeg, toSvg, toBlob } from "dom-to-image";
 import { Options } from "html-to-image/lib/options";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -48,7 +48,7 @@ const defaultSettings: EditorSettings = {
   fontSize: "16px",
   language: "jsx",
   padding: "medium",
-  title: "App.tsx",
+  title: "Untitled",
   code: DEFAULT_JS_VALUE,
   backgroundImage: gradients[0].gradient,
   backgroundColor: gradients[0].color,
@@ -61,22 +61,17 @@ export type EditorContextType = {
   setSettings: (newState: EditorSettings) => void;
   canvasRef: React.RefObject<HTMLDivElement>;
   onExport: () => void;
+  onReset: () => void;
   onCopyAsLink: () => void;
   onCopyAsImage: () => void;
 };
 export const EditorContext = createContext<EditorContextType | null>(null);
 
-export const EditorProvider = ({
-  children,
-  settings: initalSettings,
-}: {
-  children: ReactNode;
-  settings?: EditorSettings;
-}) => {
+export const EditorProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [settings, setSettings] = useLocalStorage<EditorSettings>({
     key: "editor-settings",
-    value: initalSettings ? initalSettings : defaultSettings,
+    value: defaultSettings,
   });
 
   const router = useRouter();
@@ -161,6 +156,10 @@ export const EditorProvider = ({
       console.log("Copied");
     }, [settings]);
 
+  const onReset = () => {
+    setSettings(defaultSettings);
+  };
+
   if (isLoading) return null;
 
   return (
@@ -172,6 +171,7 @@ export const EditorProvider = ({
         onExport,
         onCopyAsLink,
         onCopyAsImage,
+        onReset,
       }}
     >
       {children}
