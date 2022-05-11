@@ -9,6 +9,7 @@ import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toPng, toJpeg, toSvg } from "html-to-image";
 import { Options } from "html-to-image/lib/options";
+import axios from "axios";
 
 export type EditorSettings = {
   title: string;
@@ -114,8 +115,9 @@ export const EditorProvider = ({
   }, [settings, canvasRef]);
 
   const onCopyLink: EditorContextType["onCopyLink"] = useCallback(async () => {
-    // console.log(window.location);
-    // const origin = window.location.origin;
+    console.log(window.location);
+    const origin = window.location.origin;
+    await axios.get(`${origin}/hash-code`);
     // const searchParams = await Promise.all(
     //   Object.keys(settings).map(async (item) => {
     //     if (item === "code") {

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export type UseLocalStorageProps<T> = {
   key: string;
@@ -16,7 +16,7 @@ export function useLocalStorage<T>({
 }: UseLocalStorageProps<T>): UseLocalStorageReturn<T> {
   const [state, setState] = useState<T>(value);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const lsstate = localStorage.getItem(key);
     setState(lsstate ? JSON.parse(lsstate) : value);
   }, [key, value]);
