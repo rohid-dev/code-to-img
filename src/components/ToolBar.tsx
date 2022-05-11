@@ -191,9 +191,11 @@ const SelectItem = ({
       <Select.Root onValueChange={onChange} value={value}>
         <Select.Trigger
           id={`${label}-input`}
-          className="h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 appearance-none"
+          className="h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 appearance-none overflow-hidden"
         >
-          <Select.Value>{value}</Select.Value>
+          <Select.Value asChild>
+            <span className="truncate">{value}</span>
+          </Select.Value>
           <Select.Icon>
             <MdArrowDropDown className="text-xl" />
           </Select.Icon>

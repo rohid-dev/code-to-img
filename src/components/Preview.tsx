@@ -100,7 +100,15 @@ const Preview = () => {
         <div
           className="bg-no-repeat bg-cover bg-center"
           style={{
-            padding: `${64}px`,
+            padding: `${
+              settings.padding === "small"
+                ? 32
+                : settings.padding === "medium"
+                ? 48
+                : settings.padding === "large"
+                ? 64
+                : 96
+            }px`,
             backgroundImage: settings.backgroundImage,
             backgroundColor: settings.backgroundColor,
           }}

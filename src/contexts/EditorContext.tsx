@@ -2,16 +2,6 @@ import { createContext, ReactNode, useContext } from "react";
 import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export type FontSize = "12px" | "14px" | "16px" | "18px" | "20px" | "24px";
-export type PaddingSize = "sm" | "md" | "lg" | "xl" | "2xl";
-export type Language =
-  | "auto"
-  | "javascript"
-  | "typescript"
-  | "python"
-  | "go"
-  | "rust";
-
 export type EditorSettings = {
   title: string;
   code: string;
@@ -50,7 +40,7 @@ const defaultSettings: EditorSettings = {
   showTitle: true,
   showLineNumber: true,
   fontSize: "16px",
-  language: "javascript",
+  language: "jsx",
   padding: "medium",
   title: "App.tsx",
   code: DEFAULT_JS_VALUE,
