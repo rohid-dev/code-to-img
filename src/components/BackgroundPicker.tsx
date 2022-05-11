@@ -35,7 +35,10 @@ export const BackgroundPicker = () => {
             className="h-7 w-12 rounded-md ring-1 ring-white/20 bg-no-repeat bg-cover"
             style={{
               backgroundColor: settings.backgroundColor,
-              backgroundImage: settings.backgroundImage,
+              backgroundImage:
+                settings.backgroundColor === "transparent"
+                  ? "url(/transparent-bg-pattern.png)"
+                  : settings.backgroundImage,
             }}
           />
         </Popover.Trigger>
@@ -86,7 +89,7 @@ const ColorsPanel = () => {
       {colors.map((color, i) => (
         <li key={i} className="w-full">
           <button
-            className="w-full aspect-video rounded-md ring-1 ring-gray-700 bg-repeat"
+            className="w-full aspect-video rounded-md ring-1 ring-gray-700 bg-no-repeat bg-cover"
             style={{
               backgroundColor: color,
               backgroundImage:

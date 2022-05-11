@@ -5,7 +5,7 @@ import { BackgroundPicker } from "./BackgroundPicker";
 import * as Select from "@radix-ui/react-select";
 
 const ToolBar = () => {
-  const { setSettings, settings } = useEditor();
+  const { setSettings, settings, onExport, onCopyLink } = useEditor();
   return (
     <div className="fixed bottom-0 w-full left-0 right-0 p-4 md:p-8 z-20 pointer-events-none">
       <div className="mx-auto max-w-fit min-w-0 pointer-events-auto">
@@ -99,7 +99,7 @@ const ToolBar = () => {
             <div className="w-px bg-white/10 h-12" />
             <SelectItem
               label="Format"
-              options={["PNG", "JPEG", "SVG", "GIF"]}
+              options={["png", "jpeg", "svg"]}
               value={settings.renderFormat}
               onChange={(value) => {
                 setSettings({
@@ -120,10 +120,16 @@ const ToolBar = () => {
               }}
             />
             <div className="flex ring-1 ring-white/20 h-10 rounded-md">
-              <button className="bg-primary-500 hover:bg-primary-600 px-4 flex items-center justify-center h-full border-r border-r-primary-600 truncate rounded-l-md">
+              <button
+                onClick={() => onExport()}
+                className="bg-primary-500 hover:bg-primary-600 px-4 flex items-center justify-center h-full border-r border-r-primary-600 truncate rounded-l-md"
+              >
                 Export
               </button>
-              <button className="bg-primary-500 hover:bg-primary-600 w-10 flex items-center justify-center h-full truncate rounded-r-md">
+              <button
+                onClick={() => onCopyLink()}
+                className="bg-primary-500 hover:bg-primary-600 w-10 flex items-center justify-center h-full truncate rounded-r-md"
+              >
                 <MdArrowDropDown className="text-2xl" />
               </button>
             </div>

@@ -16,7 +16,7 @@ import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
 
 const Preview = () => {
-  const { settings, setSettings } = useEditor();
+  const { settings, setSettings, canvasRef } = useEditor();
   const [extentions, setExtentions] = useState<Extension[] | undefined>([]);
 
   const onCodeChange = useCallback(
@@ -98,6 +98,7 @@ const Preview = () => {
         }}
       >
         <div
+          ref={canvasRef}
           className="bg-no-repeat bg-cover bg-center"
           style={{
             padding: `${
