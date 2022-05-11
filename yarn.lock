@@ -1789,7 +1789,6 @@ __metadata:
     axios: ^0.27.2
     bcrypt: ^5.0.1
     classnames: ^2.3.1
-    dom-to-image: ^2.6.0
     html-to-image: ^1.9.0
     jsonwebtoken: ^8.5.1
     next: ^12.1.6
@@ -1967,13 +1966,6 @@ __metadata:
   version: 1.1.3
   resolution: "dlv@npm:1.1.3"
   checksum: d7381bca22ed11933a1ccf376db7a94bee2c57aa61e490f680124fa2d1cd27e94eba641d9f45be57caab4f9a6579de0983466f620a2cd6230d7ec93312105ae7
-  languageName: node
-  linkType: hard
-
-"dom-to-image@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "dom-to-image@npm:2.6.0"
-  checksum: 0d1f450b776d36f3ec982783d2a3898baaa3697f135ed0a9c70085db6bc5ac6def02f5ed7affc6acb92ef4fb3248905fabec915fed541994383d317260f784a2
   languageName: node
   linkType: hard
 

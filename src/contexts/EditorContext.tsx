@@ -9,7 +9,7 @@ import {
 } from "react";
 import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { toPng, toJpeg, toSvg, toBlob } from "dom-to-image";
+import { toPng, toJpeg, toSvg, toBlob } from "html-to-image";
 import { Options } from "html-to-image/lib/options";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -101,6 +101,7 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
   const getConvertOptions = (settings: EditorSettings) => {
     const scale =
       settings.renderScale === "3x" ? 3 : settings.renderScale === "2x" ? 2 : 1;
+    console.log(scale);
 
     const options: Options = {
       canvasWidth: canvasRef.current.clientWidth * scale,
