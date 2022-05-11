@@ -92,7 +92,7 @@ const Preview = () => {
       setBgWidth(canvasRef.current.clientWidth);
       setBgHeight(canvasRef.current.clientHeight);
     }
-  }, [settings.padding, canvasRef.current]);
+  }, [settings.padding, settings.code, settings.title, canvasRef.current]);
 
   const padding = useMemo(
     () =>
