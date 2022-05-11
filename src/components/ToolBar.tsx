@@ -21,6 +21,16 @@ const ToolBar = () => {
           <div className="flex gap-4 p-4 overflow-x-auto items-center">
             <BackgroundPicker />
             <SwitchItem
+              label="Background Blur"
+              value={settings.bgBlur}
+              onChange={() =>
+                setSettings({
+                  ...settings,
+                  bgBlur: !settings.bgBlur,
+                })
+              }
+            />
+            <SwitchItem
               label="Drop Shadow"
               value={settings.dropShadow}
               onChange={() =>
@@ -41,16 +51,6 @@ const ToolBar = () => {
                 setSettings({
                   ...settings,
                   showLineNumber: !settings.showLineNumber,
-                })
-              }
-            />
-            <SwitchItem
-              label="Background Blur"
-              value={settings.bgBlur}
-              onChange={() =>
-                setSettings({
-                  ...settings,
-                  bgBlur: !settings.bgBlur,
                 })
               }
             />
@@ -137,6 +137,16 @@ const ToolBar = () => {
                   renderScale: value,
                 });
               }}
+            />
+            <SwitchItem
+              label="Show Watermark"
+              value={settings.showWaterMark}
+              onChange={() =>
+                setSettings({
+                  ...settings,
+                  showWaterMark: !settings.showWaterMark,
+                })
+              }
             />
             <div className="flex h-10 rounded-md">
               <button

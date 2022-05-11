@@ -122,13 +122,18 @@ const Preview = () => {
       >
         <div
           ref={canvasRef}
-          className="bg-no-repeat bg-cover bg-center"
+          className="bg-no-repeat bg-cover bg-center relative"
           style={{
             padding,
             backgroundImage: settings.backgroundImage,
             backgroundColor: settings.backgroundColor,
           }}
         >
+          {settings.showWaterMark && (
+            <div className="absolute left-4 bottom-4 mix-blend-overlay opacity-50 text-white">
+              codetoimg.com
+            </div>
+          )}
           <div
             className="dark:bg-gray-800 rounded-2xl bg-white text-gray-800 dark:text-gray-100 shadow-2xl border-black/30 border dark:border-white/30 relative overflow-hidden"
             style={{
@@ -146,16 +151,15 @@ const Preview = () => {
           >
             <div
               style={{
-                backgroundImage:
-                  settings.backgroundThumb || settings.backgroundImage,
+                backgroundImage: settings.backgroundThumb,
                 backgroundColor: settings.backgroundColor,
                 width: bgWidth,
                 height: bgHeight,
                 left: `-${padding}`,
                 top: `-${padding}`,
-                zIndex: -1,
+                zIndex: -5,
                 opacity: settings.bgBlur ? 0.3 : 0,
-                filter: `blur(${settings.bgBlur ? 50 : 0}px)`,
+                filter: `blur(${settings.bgBlur ? 60 : 0}px)`,
               }}
               className="w-full h-full absolute inset-0 bg-no-repeat bg-cover bg-center"
             />

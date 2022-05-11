@@ -1,4 +1,5 @@
 import { AppProps } from "next/app";
+import Head from "next/head";
 import React from "react";
 import { EditorProvider } from "../src/contexts/EditorContext";
 import "../styles/global.css";
@@ -6,6 +7,9 @@ import "../styles/global.css";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <EditorProvider>
+      <Head>
+        <title>Code to Image Converter</title>
+      </Head>
       <Component {...pageProps} />
     </EditorProvider>
   );

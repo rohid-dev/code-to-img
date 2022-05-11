@@ -21,6 +21,7 @@ export type EditorSettings = {
   dropShadow: boolean;
   showTitle: boolean;
   bgBlur: boolean;
+  showWaterMark: boolean;
   fontSize: string;
   padding: string;
   language: string;
@@ -47,6 +48,7 @@ const defaultSettings: EditorSettings = {
   dropShadow: true,
   showTitle: true,
   showLineNumber: true,
+  showWaterMark: true,
   bgBlur: true,
   fontSize: "16px",
   language: "jsx",

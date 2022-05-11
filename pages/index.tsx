@@ -22,7 +22,7 @@ const Backgorund = () => {
     <div
       className="fixed w-full h-full inset-0 -z-10 bg-no-repeat bg-cover"
       style={{
-        backgroundImage: settings.backgroundImage,
+        backgroundImage: settings.backgroundThumb || settings.backgroundImage,
         backgroundColor: settings.backgroundColor,
       }}
     >

@@ -38,7 +38,7 @@ export const BackgroundPicker = () => {
               backgroundImage:
                 settings.backgroundColor === "transparent"
                   ? "url(/transparent-bg-pattern.png)"
-                  : settings.backgroundImage,
+                  : settings.backgroundThumb,
             }}
           />
         </Popover.Trigger>
@@ -79,6 +79,7 @@ const ColorsPanel = () => {
       setSettings({
         ...settings,
         backgroundImage: undefined,
+        backgroundThumb: undefined,
         backgroundColor: color,
       });
     },
@@ -122,6 +123,7 @@ const GradientsPanel = () => {
                 ...settings,
                 backgroundColor: gradient.color,
                 backgroundImage: gradient.gradient,
+                backgroundThumb: gradient.gradient,
               })
             }
           ></button>
