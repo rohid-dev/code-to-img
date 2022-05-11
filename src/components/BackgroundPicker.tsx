@@ -156,12 +156,10 @@ const UnsplashPanel = () => {
 
   const getPhotos = useCallback(async () => {
     const { data }: { data: UnsplashImageType[] } = await axios.get(
-      `${import.meta.env.VITE_UNSPLASH_API}/photos?per_page=20`,
+      `${process.env.NEXT_PUBLIC_UNSPLASH_API}/photos?per_page=20`,
       {
         headers: {
-          Authorization: `Client-ID ${
-            import.meta.env.VITE_UNSPLASH_ACCESS_KEY
-          }`,
+          Authorization: `Client-ID ${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}`,
         },
       }
     );
@@ -178,14 +176,10 @@ const UnsplashPanel = () => {
       e.preventDefault();
       if (!searchKey) return;
       const { data } = await axios.get(
-        `${
-          import.meta.env.VITE_UNSPLASH_API
-        }/search/photos?query=${searchKey}&per_page=20`,
+        `${process.env.NEXT_PUBLIC_UNSPLASH_API}/search/photos?query=${searchKey}&per_page=20`,
         {
           headers: {
-            Authorization: `Client-ID ${
-              import.meta.env.VITE_UNSPLASH_ACCESS_KEY
-            }`,
+            Authorization: `Client-ID ${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}`,
           },
         }
       );

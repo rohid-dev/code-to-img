@@ -5,6 +5,7 @@ import { BackgroundPicker } from "./BackgroundPicker";
 
 const ToolBar = () => {
   const { setSettings, settings, onExport, onCopyLink } = useEditor();
+
   return (
     <div className="fixed bottom-0 w-full left-0 right-0 p-4 md:p-8 z-20 pointer-events-none">
       <div className="mx-auto max-w-fit min-w-0 pointer-events-auto">

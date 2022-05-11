@@ -18,7 +18,9 @@ export function useLocalStorage<T>({
 
   useEffect(() => {
     const lsstate = localStorage.getItem(key);
-    setState(lsstate ? JSON.parse(lsstate) : value);
+    if (lsstate) {
+      setState(JSON.parse(lsstate));
+    }
   }, [key, value]);
 
   const onStateChange = (newState: T) => {

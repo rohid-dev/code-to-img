@@ -3,13 +3,16 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useRef,
+  useState,
 } from "react";
 import { gradients } from "../data/gradients";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toPng, toJpeg, toSvg } from "html-to-image";
 import { Options } from "html-to-image/lib/options";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export type EditorSettings = {
   title: string;
@@ -69,10 +72,29 @@ export const EditorProvider = ({
   children: ReactNode;
   settings?: EditorSettings;
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [settings, setSettings] = useLocalStorage<EditorSettings>({
     key: "editor-settings",
     value: initalSettings ? initalSettings : defaultSettings,
   });
+
+  const router = useRouter();
+
+  const getSettings = useCallback(async () => {
+    const { token } = router.query;
+    if (token) {
+      setIsLoading(true);
+      const { data } = await axios.get(`/api/hash-object?token=${token}`);
+      setSettings(data);
+      setIsLoading(false);
+      router.push("/");
+    }
+  }, [setIsLoading, router]);
+
+  useEffect(() => {
+    getSettings();
+  }, [getSettings]);
+
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const onExport: EditorContextType["onExport"] = useCallback(async () => {
@@ -117,18 +139,12 @@ export const EditorProvider = ({
   const onCopyLink: EditorContextType["onCopyLink"] = useCallback(async () => {
     console.log(window.location);
     const origin = window.location.origin;
-    await axios.get(`${origin}/hash-code`);
-    // const searchParams = await Promise.all(
-    //   Object.keys(settings).map(async (item) => {
-    //     if (item === "code") {
-    //       // const hashedCode = await bcrypt.hash(settings.code, 10);
-    //       return `${item}=${hashedCode}`;
-    //     }
-    //     return `${item}=${settings[item]}`;
-    //   })
-    // );
-    // console.log(searchParams);
+    const { data } = await axios.post(`/api/hash-object`, settings);
+    const link = `${origin}?token=${data.token}`;
+    window.navigator.clipboard.writeText(link);
   }, [settings]);
+
+  if (isLoading) return null;
 
   return (
     <EditorContext.Provider
