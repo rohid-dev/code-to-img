@@ -215,6 +215,7 @@ const UnsplashPanel = () => {
                   ...settings,
                   backgroundColor: image.color,
                   backgroundImage: `url(${image.urls.small})`,
+                  backgroundThumb: `url(${image.urls.thumb})`,
                 })
               }
             ></button>

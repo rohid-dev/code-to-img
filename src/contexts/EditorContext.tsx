@@ -20,11 +20,13 @@ export type EditorSettings = {
   darkMode: boolean;
   dropShadow: boolean;
   showTitle: boolean;
+  bgBlur: boolean;
   fontSize: string;
   padding: string;
   language: string;
   backgroundColor?: string;
   backgroundImage?: string;
+  backgroundThumb?: string;
   showLineNumber: boolean;
   renderScale: string;
   renderFormat: string;
@@ -45,6 +47,7 @@ const defaultSettings: EditorSettings = {
   dropShadow: true,
   showTitle: true,
   showLineNumber: true,
+  bgBlur: true,
   fontSize: "16px",
   language: "jsx",
   padding: "medium",

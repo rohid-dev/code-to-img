@@ -44,6 +44,16 @@ const ToolBar = () => {
                 })
               }
             />
+            <SwitchItem
+              label="Background Blur"
+              value={settings.bgBlur}
+              onChange={() =>
+                setSettings({
+                  ...settings,
+                  bgBlur: !settings.bgBlur,
+                })
+              }
+            />
             <SelectItem
               label="Font Size"
               options={[

@@ -1,5 +1,5 @@
 import type { Extension } from "@codemirror/state";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useEditor } from "../contexts/EditorContext";
 import Editor from "./Editor/Editor";
 import { getTheme } from "./Editor/themes";
@@ -16,6 +16,8 @@ import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
 
 const Preview = () => {
+  const [bgWidth, setBgWidth] = useState(0);
+  const [bgHeight, setBgHeight] = useState(0);
   const { settings, setSettings, canvasRef } = useEditor();
   const [extentions, setExtentions] = useState<Extension[] | undefined>([]);
 
@@ -85,6 +87,27 @@ const Preview = () => {
     }
   }, [settings.language]);
 
+  useEffect(() => {
+    if (canvasRef.current) {
+      setBgWidth(canvasRef.current.clientWidth);
+      setBgHeight(canvasRef.current.clientHeight);
+    }
+  }, [settings.padding, canvasRef.current]);
+
+  const padding = useMemo(
+    () =>
+      `${
+        settings.padding === "small"
+          ? 32
+          : settings.padding === "medium"
+          ? 48
+          : settings.padding === "large"
+          ? 64
+          : 96
+      }px`,
+    [settings.padding]
+  );
+
   return (
     <div
       className={`w-full overflow-x-auto p-16 mb-40 ${
@@ -92,7 +115,7 @@ const Preview = () => {
       }`}
     >
       <div
-        className="mx-auto overflow-hidden w-fit bg-repeat bg-center rounded-xl"
+        className="mx-auto overflow-hidden w-fit bg-repeat bg-center rounded-xl relative"
         style={{
           backgroundImage: "url(/transparent-bg-pattern.png)",
         }}
@@ -101,25 +124,14 @@ const Preview = () => {
           ref={canvasRef}
           className="bg-no-repeat bg-cover bg-center"
           style={{
-            padding: `${
-              settings.padding === "small"
-                ? 32
-                : settings.padding === "medium"
-                ? 48
-                : settings.padding === "large"
-                ? 64
-                : 96
-            }px`,
+            padding,
             backgroundImage: settings.backgroundImage,
             backgroundColor: settings.backgroundColor,
           }}
         >
           <div
-            className="dark:bg-gray-800 rounded-2xl bg-white text-gray-800 dark:text-gray-100 shadow-2xl border-black/30 border dark:border-white/30"
+            className="dark:bg-gray-800 rounded-2xl bg-white text-gray-800 dark:text-gray-100 shadow-2xl border-black/30 border dark:border-white/30 relative overflow-hidden"
             style={{
-              transitionProperty: "box-shadow, background-color, border-color",
-              transitionDuration: "300ms",
-              transitionTimingFunction: "ease-in-out",
               boxShadow: `0 0 0 1px ${
                 settings.darkMode
                   ? "rgba(0, 0, 0, 0.3)"
@@ -129,8 +141,24 @@ const Preview = () => {
                   ? ", 0px 12px 30px -3px rgba(0, 0, 0, 0.4)"
                   : ""
               }`,
+              zIndex: 10,
             }}
           >
+            <div
+              style={{
+                backgroundImage:
+                  settings.backgroundThumb || settings.backgroundImage,
+                backgroundColor: settings.backgroundColor,
+                width: bgWidth,
+                height: bgHeight,
+                left: `-${padding}`,
+                top: `-${padding}`,
+                zIndex: -1,
+                opacity: settings.bgBlur ? 0.3 : 0,
+                filter: `blur(${settings.bgBlur ? 50 : 0}px)`,
+              }}
+              className="w-full h-full absolute inset-0 bg-no-repeat bg-cover bg-center"
+            />
             <WindowTitleBar />
             <Editor
               value={settings.code}
@@ -154,7 +182,7 @@ export default Preview;
 const WindowTitleBar = () => {
   const { settings, setSettings } = useEditor();
   return (
-    <div className="px-4 h-12 flex items-center gap-8">
+    <div className="px-4 h-12 flex items-center gap-8 z-20">
       <div className="flex items-center gap-2 h-full">
         <div className="w-3 h-3 rounded-full bg-red-500" />
         <div className="w-3 h-3 rounded-full bg-yellow-500" />
