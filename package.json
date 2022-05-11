@@ -11,6 +11,7 @@
     "@codemirror/lang-javascript": "^0.20.0",
     "@codemirror/theme-one-dark": "^0.20.0",
     "@radix-ui/react-popover": "^0.1.6",
+    "@radix-ui/react-select": "^0.1.1",
     "@uiw/react-codemirror": "^4.7.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",

@@ -50,7 +50,7 @@ const defaultSettings: EditorSettings = {
   showLineNumber: true,
   fontSize: "16px",
   language: "javascript",
-  padding: "md",
+  padding: "medium",
   title: "App.tsx",
   code: DEFAULT_JS_VALUE,
   backgroundImage: gradients[0].gradient,

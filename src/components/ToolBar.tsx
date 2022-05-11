@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropDown, MdArrowDropUp, MdCheck } from "react-icons/md";
 import { useEditor } from "../contexts/EditorContext";
 import { BackgroundPicker } from "./BackgroundPicker";
+import * as Select from "@radix-ui/react-select";
 
 const ToolBar = () => {
   const { setSettings, settings } = useEditor();
@@ -37,7 +38,17 @@ const ToolBar = () => {
             />
             <SelectItem
               label="Font Size"
-              options={["12px", "14px", "16px", "18px"]}
+              options={[
+                "12px",
+                "14px",
+                "16px",
+                "18px",
+                "20px",
+                "22px",
+                "24px",
+                "28px",
+                "32px",
+              ]}
               value={settings.fontSize}
               onChange={(value) => {
                 setSettings({
@@ -172,19 +183,43 @@ const SelectItem = ({
       <label htmlFor={`${label}-input`} className="text-xs text-white/30">
         {label}
       </label>
-      <select
-        id={`${label}-input`}
-        className="h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 appearance-none"
-        onChange={(e) => onChange(e.target.value)}
-        value={value}
-      >
-        {options.map((option, i) => (
-          <option key={i} value={option}>
-            {option}
-          </option>
-        ))}
-        <MdArrowDropDown className="text-xl" />
-      </select>
+      <Select.Root onValueChange={onChange} value={value}>
+        <Select.Trigger
+          id={`${label}-input`}
+          className="h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 appearance-none"
+        >
+          <Select.Value>{value}</Select.Value>
+          <Select.Icon>
+            <MdArrowDropDown className="text-xl" />
+          </Select.Icon>
+        </Select.Trigger>
+        <Select.Content className="bg-gray-900/0 backdrop-blur-xl ring-1 ring-white/20 shadow-2xl rounded-md">
+          <Select.ScrollUpButton className="h-4 flex items-center justify-center w-full">
+            <MdArrowDropUp className="text-xl" />
+          </Select.ScrollUpButton>
+          <Select.Viewport className="p-1">
+            <Select.Group>
+              {options.map((option, i) => (
+                <Select.Item
+                  value={option}
+                  key={i}
+                  className="px-2 h-7 rounded text-sm outline-none focus:bg-primary-500 focus:text-white flex items-center cursor-pointer overflow-hidden gap-3"
+                >
+                  <Select.ItemText className="flex-1 truncate">
+                    {option}
+                  </Select.ItemText>
+                  <Select.ItemIndicator>
+                    <MdCheck className="text-md" />
+                  </Select.ItemIndicator>
+                </Select.Item>
+              ))}
+            </Select.Group>
+          </Select.Viewport>
+          <Select.ScrollDownButton className="h-4 flex items-center justify-center w-full">
+            <MdArrowDropDown className="text-xl" />
+          </Select.ScrollDownButton>
+        </Select.Content>
+      </Select.Root>
     </div>
   );
 };
