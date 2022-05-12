@@ -8,6 +8,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <EditorProvider>
       <Head>
+        <link rel="shortcut icon" href="/favicon.svg" />
         <title>Code to Image Converter</title>
       </Head>
       <Component {...pageProps} />
