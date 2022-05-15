@@ -98,7 +98,7 @@ const Preview = () => {
     () =>
       `${
         settings.padding === "small"
-          ? 32
+          ? 36
           : settings.padding === "medium"
           ? 48
           : settings.padding === "large"
@@ -130,7 +130,7 @@ const Preview = () => {
           }}
         >
           {settings.showWaterMark && (
-            <div className="absolute left-4 bottom-4 mix-blend-overlay opacity-50 text-white">
+            <div className="absolute left-4 bottom-2 mix-blend-overlay opacity-50 text-white">
               codetoimg.com
             </div>
           )}
