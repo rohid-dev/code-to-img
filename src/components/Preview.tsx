@@ -14,6 +14,10 @@ import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
 import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
+import { wast } from "@codemirror/lang-wast";
+import { lezer } from "@codemirror/lang-lezer";
+import { sql } from "@codemirror/lang-sql";
+import { php } from "@codemirror/lang-php";
 
 const Preview = () => {
   const [bgWidth, setBgWidth] = useState(0);
@@ -80,6 +84,18 @@ const Preview = () => {
         break;
       case "xml":
         setExtentions([xml()]);
+        break;
+      case "wast":
+        setExtentions([wast()]);
+        break;
+      case "lezer":
+        setExtentions([lezer()]);
+        break;
+      case "sql":
+        setExtentions([sql()]);
+        break;
+      case "php":
+        setExtentions([php()]);
         break;
       default:
         setExtentions(undefined);
