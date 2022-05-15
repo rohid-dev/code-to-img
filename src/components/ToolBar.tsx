@@ -109,6 +109,7 @@ const ToolBar = () => {
                 "lezer",
                 "sql",
                 "php",
+                "swift",
               ].sort((a, b) => (a < b ? -1 : 1))}
               value={settings.language}
               onChange={(value) => {

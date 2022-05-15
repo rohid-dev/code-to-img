@@ -78,6 +78,8 @@ const Preview = () => {
         break;
       case "c#":
         setExtentions([cpp()]);
+      case "swift":
+        setExtentions([cpp()]);
         break;
       case "java":
         setExtentions([java()]);
