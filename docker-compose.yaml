@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  codetoimage:
+    container_name: codetoimage
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: yarn dev
