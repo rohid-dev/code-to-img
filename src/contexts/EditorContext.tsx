@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -15,6 +16,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 export type EditorSettings = {
+  filename: string;
   title: string;
   code: string;
   darkMode: boolean;
@@ -44,16 +46,17 @@ const App = () => {
 export default App;`;
 
 const defaultSettings: EditorSettings = {
+  filename: "Untitled",
   darkMode: true,
   dropShadow: true,
-  showTitle: true,
+  showTitle: false,
   showLineNumber: true,
   showWaterMark: true,
   bgBlur: true,
   fontSize: "16px",
   language: "jsx",
   padding: "medium",
-  title: "Untitled",
+  title: "Title Text",
   code: DEFAULT_JS_VALUE,
   backgroundImage: gradients[0].gradient,
   backgroundThumb: gradients[0].gradient,
@@ -70,6 +73,7 @@ export type EditorContextType = {
   onReset: () => void;
   onCopyAsLink: () => void;
   onCopyAsImage: () => void;
+  getPadding: () => string;
 };
 export const EditorContext = createContext<EditorContextType | null>(null);
 
@@ -139,7 +143,7 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
     if (!imgUrl) return;
 
     const link = document.createElement("a");
-    link.download = `${settings.title}.${fileExtension}`;
+    link.download = `${settings.filename || "Untitled"}${fileExtension}`;
     link.href = imgUrl;
     link.click();
   }, [settings, canvasRef]);
@@ -167,6 +171,18 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
     setSettings(defaultSettings);
   };
 
+  const getPadding = useCallback(() => {
+    return `${
+      settings.padding === "small"
+        ? 36
+        : settings.padding === "medium"
+        ? 48
+        : settings.padding === "large"
+        ? 64
+        : 96
+    }px`;
+  }, [settings.padding]);
+
   if (isLoading) return null;
 
   return (
@@ -179,6 +195,7 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
         onCopyAsLink,
         onCopyAsImage,
         onReset,
+        getPadding,
       }}
     >
       {children}
