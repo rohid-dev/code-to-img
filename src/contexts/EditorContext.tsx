@@ -56,6 +56,7 @@ const defaultSettings: EditorSettings = {
   title: "Untitled",
   code: DEFAULT_JS_VALUE,
   backgroundImage: gradients[0].gradient,
+  backgroundThumb: gradients[0].gradient,
   backgroundColor: gradients[0].color,
   renderScale: "1x",
   renderFormat: "png",
