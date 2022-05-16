@@ -1,32 +1,13 @@
 import { AppProps } from "next/app";
-import Head from "next/head";
-import Script from "next/script";
 import React from "react";
+import SEO from "../src/components/SEO";
 import { EditorProvider } from "../src/contexts/EditorContext";
 import "../styles/global.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <EditorProvider>
-      <Script
-        strategy="lazyOnload"
-        src={`
-        https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}
-      `}
-      />
-      <Script strategy="lazyOnload">
-        {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
-        `}
-      </Script>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <title>Code to Image Converter</title>
-      </Head>
+      <SEO />
       <Component {...pageProps} />
     </EditorProvider>
   );
