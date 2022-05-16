@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { FaCoffee, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 const Header = () => {
   return (
     <div className="w-full py-4 flex items-center px-4 gap-4">
