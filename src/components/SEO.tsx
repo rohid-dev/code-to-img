@@ -32,6 +32,10 @@ const SEO = () => {
         <link rel="shortcut icon" href="/favicon.svg" />
         <title>{TITLE}</title>
         <meta name="description" content={DESCRIPTION} />
+        <meta
+          name="keywords"
+          content="codetoimg, codeimg, image, code, developer, developer tool, image generator, code snippets, snippets, code to image, converter, image converter, convert code to images, code to img, code image"
+        />
 
         {/* TWITTER */}
         <meta name="twitter:card" content="summary_large_image" />
