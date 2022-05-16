@@ -172,7 +172,7 @@ const TitleField = () => {
             : "#000",
           // 2.25 is the lineheight of the textarea
           height: `${2.25 * totalLines}rem`,
-          width: `max(300px, ${largestLine * 0.7}ch)`,
+          width: `max(300px, ${largestLine}ch)`,
           textShadow: "0 0 0.35rem rgba(0, 0, 0, 0.2)",
         }}
         spellCheck="false"
