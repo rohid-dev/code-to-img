@@ -21,25 +21,24 @@ const Header = () => {
       >
         <FaGithub className="text-2xl" />
       </a>
-      <a
-        href="https://www.buymeacoffee.com/rohid"
-        target="_blank"
-        className="flex items-center"
-      >
-        <Image
-          src="/bmc-button.png"
-          alt="By me a coffee link"
-          height="40px"
-          width="140px"
-          objectFit="contain"
-        />
-      </a>
+      <ByMeACoffeeButton />
       <ProductHuntBadge />
     </div>
   );
 };
 
 export default Header;
+
+const ByMeACoffeeButton = () => (
+  <a href="https://www.buymeacoffee.com/rohid" target="_blank">
+    <img
+      src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+      alt="Buy Me A Coffee"
+      height="40px"
+      width="140px"
+    />
+  </a>
+);
 
 export const ProductHuntBadge = () => (
   // <a
