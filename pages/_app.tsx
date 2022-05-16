@@ -1,16 +1,13 @@
 import { AppProps } from "next/app";
-import Head from "next/head";
 import React from "react";
+import SEO from "../src/components/SEO";
 import { EditorProvider } from "../src/contexts/EditorContext";
 import "../styles/global.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <EditorProvider>
-      <Head>
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <title>Code to Image Converter</title>
-      </Head>
+      <SEO />
       <Component {...pageProps} />
     </EditorProvider>
   );
