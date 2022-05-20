@@ -270,7 +270,7 @@ const SelectItem = ({
         disabled={disabled}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-transparent cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+        className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-gray-900/60 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
       >
         {options.map((option, i) => (
           <option key={i} value={option}>
