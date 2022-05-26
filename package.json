@@ -5,19 +5,19 @@
   "license": "MIT",
   "author": {
     "name": "Rohidul Islam",
-    "url": "https://github.com/rohidisdev",
+    "url": "https://github.com/rohid-dev",
     "email": "rohidul209@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rohidisdev/code-to-img"
+    "url": "git+https://github.com/rohid-dev/code-to-img"
   },
   "homepage": "https://codetoimg.com",
-  "bugs": "https://github.com/rohidisdev/code-to-img/issues",
+  "bugs": "https://github.com/rohid-dev/code-to-img/issues",
   "contributors": [
     {
       "name": "Rohidul Islam",
-      "url": "https://github.com/rohidisdev"
+      "url": "https://github.com/rohid-dev"
     },
     {
       "name": "Ankur Paul",
