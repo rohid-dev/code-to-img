@@ -6,7 +6,7 @@ const Header = () => {
         Built by -{" "}
         <a
           target="_blank"
-          href="https://twitter.com/rohid_dev"
+          href="https://rohid.dev"
           className="text-white hover:underline underline-offset-2"
         >
           Rohid
