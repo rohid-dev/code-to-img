@@ -5,7 +5,7 @@ const Header = () => {
     <div className="w-full py-4 flex items-center px-4 gap-6">
       <div className="inline-flex gap-4 items-center">
         <Link href="/">
-          <a>CodeToImg</a>
+          <a className="font-medium text-xl">CodeToImg</a>
         </Link>
         <Link href="/legal/privacy-policy">
           <a>Privacy Policy</a>
