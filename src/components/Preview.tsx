@@ -142,17 +142,17 @@ const WindowTitleBar = () => {
 const TitleField = () => {
   const { settings, setSettings, getPadding } = useEditor();
 
+  const handleChange = useCallback(
+    (e: any) => {
+      setSettings({
+        ...settings,
+        title: e.target.innerText,
+      });
+    },
+    [settings, setSettings]
+  );
+
   if (!settings.showTitle) return null;
-
-  const largestLine = useMemo(() => {
-    const lines = settings.title.split("\n");
-    return Math.max(...lines.map((line) => line.length));
-  }, [settings.title]);
-
-  const totalLines = useMemo(() => {
-    const lines = settings.title.split("\n");
-    return lines.length;
-  }, [settings.title]);
 
   return (
     <div
@@ -161,8 +161,7 @@ const TitleField = () => {
         paddingBottom: getPadding(),
       }}
     >
-      <textarea
-        placeholder="Title Text"
+      <div
         className="w-full text-3xl bg-transparent outline-none border-none text-center placeholder-white/50 p-0 font-bold resize-none selection:bg-blue-500 inline-block"
         style={{
           color: settings.backgroundImage
@@ -171,19 +170,12 @@ const TitleField = () => {
             ? "#fff"
             : "#000",
           // 2.25 is the lineheight of the textarea
-          height: `${2.25 * totalLines}rem`,
-          width: `max(300px, ${largestLine}ch)`,
           textShadow: "0 0 0.35rem rgba(0, 0, 0, 0.2)",
         }}
         spellCheck="false"
-        value={settings.title}
-        onChange={(e) =>
-          setSettings({
-            ...settings,
-            title: e.target.value,
-          })
-        }
-        rows={1}
+        onBlur={handleChange}
+        contentEditable
+        dangerouslySetInnerHTML={{ __html: settings.title }}
       />
     </div>
   );
