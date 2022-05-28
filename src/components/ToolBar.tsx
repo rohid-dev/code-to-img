@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropDown, MdCheck } from "react-icons/md";
 import { useEditor } from "../contexts/EditorContext";
 import { BackgroundPicker } from "./BackgroundPicker";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import * as Select from "@radix-ui/react-select";
 
 const ToolBar = () => {
   const {
@@ -266,18 +267,34 @@ const SelectItem = ({
       <label htmlFor={`${label}-input`} className="text-xs text-white/30">
         {label}
       </label>
-      <select
-        disabled={disabled}
+      <Select.Root
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-transparent cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+        defaultValue={value}
+        onValueChange={(e) => onChange(e)}
       >
-        {options.map((option, i) => (
-          <option key={i} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+        <Select.Trigger className="appearance-none h-7 rounded-md ring-1 ring-white/20 relative px-3 text-sm flex gap-2 items-center text-white/50 hover:text-white/90 overflow-hidden bg-transparent cursor-pointer disabled:opacity-50 disabled:pointer-events-none">
+          <Select.Value />
+          <Select.Icon />
+        </Select.Trigger>
+        <Select.Content className="bg-gray-900 border border-gray-800 p-2 rounded-lg">
+          <Select.ScrollUpButton />
+          <Select.Viewport>
+            {options.map((option, i) => (
+              <Select.Item
+                key={i}
+                value={option}
+                className="hover:bg-indigo-500 hover:text-white px-2 h-6 flex items-center gap-2 rounded outline-none cursor-pointer"
+              >
+                <Select.ItemText>{option}</Select.ItemText>
+                <Select.ItemIndicator>
+                  <MdCheck />
+                </Select.ItemIndicator>
+              </Select.Item>
+            ))}
+          </Select.Viewport>
+          <Select.ScrollDownButton />
+        </Select.Content>
+      </Select.Root>
     </div>
   );
 };
