@@ -1,4 +1,3 @@
-import Header from "../src/components/Header";
 import Preview from "../src/components/Preview";
 import ToolBar from "../src/components/ToolBar";
 import { useEditor } from "../src/contexts/EditorContext";
@@ -7,7 +6,6 @@ function IndexPage() {
   return (
     <>
       <Backgorund />
-      <Header />
       <Preview />
       <ToolBar />
     </>

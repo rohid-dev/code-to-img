@@ -1,17 +1,19 @@
+import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 const Header = () => {
   return (
-    <div className="w-full py-4 flex items-center px-4 gap-4">
-      <p className="text-gray-300">
-        Built by -{" "}
-        <a
-          target="_blank"
-          href="https://rohid.dev"
-          className="text-white hover:underline underline-offset-2"
-        >
-          Rohid
-        </a>
-      </p>
+    <div className="w-full py-4 flex items-center px-4 gap-6">
+      <div className="inline-flex gap-4 items-center">
+        <Link href="/">
+          <a>CodeToImg</a>
+        </Link>
+        <Link href="/legal/privacy-policy">
+          <a>Privacy Policy</a>
+        </Link>
+        <Link href="/legal/cookie-policy">
+          <a>Cookie Policy</a>
+        </Link>
+      </div>
       <div className="flex-1"></div>
       <a
         href="https://github.com/rohid-dev/code-to-img"
