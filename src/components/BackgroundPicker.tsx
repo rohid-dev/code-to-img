@@ -171,7 +171,7 @@ const UnsplashPanel = () => {
 
   useEffect(() => {
     getPhotos();
-  }, []);
+  }, [getPhotos]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {

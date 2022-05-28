@@ -1,5 +1,5 @@
 import type { Extension } from "@codemirror/state";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useEditor } from "../contexts/EditorContext";
 import Editor from "./Editor/Editor";
 import { getTheme } from "./Editor/themes";
@@ -54,7 +54,7 @@ const Window = () => {
         code: value,
       });
     },
-    [setSettings]
+    [settings, setSettings]
   );
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Window = () => {
       setBgWidth(canvasRef.current.clientWidth);
       setBgHeight(canvasRef.current.clientHeight);
     }
-  }, [settings.padding, settings.code, settings.title, canvasRef.current]);
+  }, [settings.padding, settings.code, settings.title, canvasRef]);
 
   return (
     <div

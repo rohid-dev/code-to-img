@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 const Header = () => {
@@ -18,6 +20,7 @@ const Header = () => {
       <a
         href="https://github.com/rohid-dev/code-to-img"
         target="_blank"
+        rel="noreferrer"
         className="w-10 h-10 flex items-center justify-center hover:bg-white/10 active:bg-white/20 rounded-full"
       >
         <FaGithub className="text-2xl" />
@@ -31,7 +34,7 @@ const Header = () => {
 export default Header;
 
 const ByMeACoffeeButton = () => (
-  <a href="https://www.buymeacoffee.com/rohid" target="_blank">
+  <a href="https://www.buymeacoffee.com/rohid" target="_blank" rel="noreferrer">
     <img
       src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
       alt="Buy Me A Coffee"
@@ -57,6 +60,7 @@ export const ProductHuntBadge = () => (
     href="https://www.producthunt.com/posts/code-to-image-converter?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-code&#0045;to&#0045;image&#0045;converter"
     target="_blank"
     className="flex items-center"
+    rel="noreferrer"
   >
     <img
       src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=346242&theme=light&period=daily"
